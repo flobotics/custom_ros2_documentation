@@ -188,7 +188,7 @@ Inside myRobot.urdf.xml we add another link and give it the green color.
    </robot>
 ```
    
-We need a <joint>, which tells which one is the root_link.
+We need a joint, which tells which one is the root_link. The first parent is the root link.
 
 ## Build, run, watch
 
