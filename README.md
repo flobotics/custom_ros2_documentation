@@ -12,3 +12,5 @@
 
 [Building ROS2 Package with tensorflow mediapipe](Building-ROS2-Package-with-tensorflow-mediapipe.md)
 
+
+[Building ROS2 Rqt Plugin](Building-ROS2-Rqt-Plugin.md)
