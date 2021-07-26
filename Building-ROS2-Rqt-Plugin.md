@@ -35,7 +35,7 @@ look at other tutorials
   <name>rqt_rt_preempt</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="inflo@web.de">ros2</maintainer>
+  <maintainer email="hey@ho.de">ros2</maintainer>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>
