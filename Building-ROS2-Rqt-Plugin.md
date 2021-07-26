@@ -270,3 +270,5 @@ rqt
 ```
 
 We see our button, and the changed Text.
+
+![images/rqt-rt-preempt-button.png](images/rqt-rt-preempt-button.png)
