@@ -246,3 +246,27 @@ rqt -s rqt_rt_preempt --force-discover
 ```
 
 Now under "Plugins"  "Miscellaneous Tools" it is.
+
+
+## Adding a Qt pushbutton and change text
+
+Double-click the RosRtpreempt.ui file in eclipse and the Qt-designer opens. Setup a pushbutton
+and set the objectName to "pushButton".
+
+![images/qt-designer-objectname.png](images/qt-designer-objectname.png)
+
+
+In the rt_preempt_widget.py file add 
+
+```
+self.pushButton.setText('Text Changed')
+```
+
+## Build it and run it.
+
+```
+colcon build
+rqt
+```
+
+We see our button, and the changed Text.
