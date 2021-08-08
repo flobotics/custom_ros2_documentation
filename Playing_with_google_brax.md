@@ -276,7 +276,8 @@ name	The name of the body.
 ```
 
 ```
-colliders		Here it seemed that you can define the shape of the body.
+colliders		Here it seemed that you can define the shape of the body. You can have
+				many colliders inside a bodies{}
 
 capsule			Inside colliders. It has "radius" and "length" members.
 
@@ -304,3 +305,84 @@ mass	The mass of the body in kg. If you miss it, and render a trajectory, it onl
 ```
 frozen		The ???
 ```
+
+## A Look at joints
+
+You define a joint with
+
+```
+joints{}
+```
+
+
+Then inside you need to define e.g.
+
+```
+joints {
+  name: "abdomen_x"
+  stiffness: 15000.0
+  parent: "lwaist"
+  child: "pelvis"
+  parent_offset {
+    z: -0.065
+  }
+  child_offset {
+    z: 0.1
+  }
+  rotation {
+    x: 90.0
+  }
+  angular_damping: 20.0
+  angle_limit {
+    min: -35.0
+    max: 35.0
+  }
+}
+```
+
+```
+name	The name of the joint.
+```
+
+```
+parent	 The name of the parent bodies{}.
+```
+
+```
+child	 The name of the child bodies{}.
+```
+
+```
+parent_offset	 The offset to the parents ???
+```
+
+```
+child_offset	 The offset to the childs ????
+```
+
+```
+rotation	 The rotation of ???
+```
+
+```
+angular_damping	 The ????
+```
+
+```
+angle_limit	 The limit that the joint can reach. Inside there is "min" and "max".
+					Its in degrees ???
+```
+
+```
+stiffness	 	The ????
+```
+
+```
+limit_strength	 	The ????
+```
+
+```
+stiffness	 	The ????
+```
+
+
