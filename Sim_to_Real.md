@@ -11,7 +11,7 @@ Build a sim-to-real-arena. The openAI-gym reacher is a good first try.
 
 ## Sim-to-real gym
 
-![images/sim-to-real-gym.jpg](images/sim-to-real-gym.jpg =500pxx200px)
+![images/sim-to-real-gym.jpg](images/sim-to-real-gym.jpg)
 
 ## Select a simulator
 
