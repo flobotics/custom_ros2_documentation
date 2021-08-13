@@ -306,6 +306,33 @@ mass	The mass of the body in kg. If you miss it, and render a trajectory, it onl
 frozen		The ???
 ```
 
+
+## A Box
+
+```
+bodies {
+  name: "box"
+  colliders {
+    box {
+      halfsize { 
+          x: 0.5 
+          y: 0.5 
+          z: 0.5 }
+    }
+    position { 
+        x: .00
+        z: .0
+    }
+  }
+  inertia {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  mass: 1.0
+}
+```
+
 ## A Look at joints
 
 You define a joint with
