@@ -279,7 +279,7 @@ name	The name of the body.
 colliders		Here it seemed that you can define the shape of the body. You can have
 				many colliders inside a bodies{}
 
-capsule			Inside colliders. It has "radius" and "length" members.
+capsule			Inside colliders. It has "radius" and "length", "end: 1" members.
 
 sphere			It has "radius".
 
@@ -412,4 +412,274 @@ limit_strength	 	The ????
 stiffness	 	The ????
 ```
 
+
+
+## Environment class
+
+If you build your own environment, you can copy a existing one, e.g. reacher.py to
+myenv.py.
+
+### __init__
+
+Inside the __init__ constructor we first read our _SYSTEM_CONFIG (which is the description of
+the bodies,joints,actuators,etc) and give it to the superclass.
+
+```
+config = text_format.Parse(_SYSTEM_CONFIG, brax.Config())
+super().__init__(config, **kwargs)
+```
+
+Then we can get values from our _SYSTEM_CONFIG with self.sys.body_idx['bodies-name'] . Where
+bodies-name is a name of a body inside your _SYSTEM_CONFIG.
+
+```
+self.target_idx = self.sys.body_idx['Target']
+```
+
+### step()
+
+Inside the step() method, to get the position of a body you can use
+
+```
+qp, info = self.sys.step(state.qp, action)
+new_pos = qp.pos[self.torso_idx]
+```
+
+and
+
+```
+old_pos = state.qp.pos[self.torso_idx]
+```
+
+and you can get how far both are away from another with
+
+```
+torso_delta = qp.pos[self.torso_idx] - state.qp.pos[self.torso_idx]
+```
+
+The output of qp.pos[self.target_idx] looks like
+
+```
+[ 0.04724419 -0.13569441  0.01      ]
+```
+
+qp.pos is a sum of bodies position and joint-child-parent-offsets.
+
+
+
+
+The output of arm_qps = take(qp, jnp.array(self.arm_idx)) looks like
+
+```
+QP(pos=DeviceArray([0.  , 0.  , 0.05], dtype=float32), rot=DeviceArray([1., 0., 0., 0.], dtype=float32), vel=DeviceArray([0., 0., 0.], dtype=float32), ang=DeviceArray([0., 0., 0.], dtype=float32))
+```
+
+The output of tip_pos, tip_vel = math.to_world(arm_qps, jnp.array([0.11, 0., 0.])) looks like
+
+```
+tip_pos >[0.11 0.   0.05]<
+tip_vel >[0. 0. 0.]<
+```
+
+The output of tip_to_target = [tip_pos - qp.pos[self.target_idx]] looks like
+
+```
+[DeviceArray([0.06275581, 0.13569441, 0.04      ], dtype=float32)]
+```
+
+The output of cos_sin_angle = [jnp.cos(joint_angle), jnp.sin(joint_angle)] looks like
+
+```
+[DeviceArray([1.], dtype=float32), DeviceArray([0.], dtype=float32)]
+```
+
+The output of qvel = [tip_vel[:2]] looks like 
+
+```
+[DeviceArray([0., 0.], dtype=float32)]
+```
+
+The output of self.sys.joint_revolute looks like
+
+```
+Revolute(stiffness=DeviceArray([100.], dtype=float32), angular_damping=DeviceArray([0.], dtype=float32), spring_damping=DeviceArray([3.], dtype=float32), limit_strength=DeviceArray([0.], dtype=float32), limit=DeviceArray([[[-1.0471976,  1.0471976]]], dtype=float32), body_p=Body(idx=DeviceArray([1], dtype=int32), inertia=DeviceArray([[[1., 0., 0.],
+              [0., 1., 0.],
+              [0., 0., 1.]]], dtype=float32), mass=DeviceArray([0.03560472], dtype=float32), active=DeviceArray([ True], dtype=bool)), body_c=Body(idx=DeviceArray([2], dtype=int32), inertia=DeviceArray([[[1., 0., 0.],
+              [0., 1., 0.],
+              [0., 0., 1.]]], dtype=float32), mass=DeviceArray([0.03560472], dtype=float32), active=DeviceArray([ True], dtype=bool)), axis_1=DeviceArray([[1., 0., 0.]], dtype=float32), axis_2=DeviceArray([[0., 0., 1.]], dtype=float32), axis_3=DeviceArray([[ 0., -1.,  0.]], dtype=float32), off_p=DeviceArray([[0.04, 0.  , 0.  ]], dtype=float32), off_c=DeviceArray([[0., 0., 0.]], dtype=float32), ref=DeviceArray([[-0.        ,  0.99999905,  0.        ]], dtype=float32), config=bodies {
+  name: "ground"
+  colliders {
+    plane {
+    }
+  }
+  inertia {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  mass: 1.0
+  frozen {
+    position {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+    }
+    rotation {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+    }
+    all: true
+  }
+}
+bodies {
+  name: "servo_bracket_fp04_f2"
+  colliders {
+    box {
+      halfsize {
+        x: 0.04800000041723251
+        y: 0.024000000208616257
+        z: 0.006000000052154064
+      }
+    }
+  }
+  inertia {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  mass: 0.03560471534729004
+  frozen {
+    position {
+      z: 1.0
+    }
+    rotation {
+      x: 1.0
+      y: 1.0
+    }
+  }
+}
+bodies {
+  name: "servo_0"
+  colliders {
+    box {
+      halfsize {
+        x: 0.03799999877810478
+        y: 0.029999999329447746
+        z: 0.05000000074505806
+      }
+    }
+  }
+  inertia {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  mass: 0.03560471534729004
+  frozen {
+    position {
+      z: 1.0
+    }
+    rotation {
+      x: 1.0
+      y: 1.0
+    }
+  }
+}
+bodies {
+  name: "target"
+  colliders {
+    position {
+    }
+    sphere {
+      radius: 0.008999999612569809
+    }
+  }
+  inertia {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  mass: 1.0
+  frozen {
+    position {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+    }
+    rotation {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+    }
+    all: true
+  }
+}
+joints {
+  name: "joint0"
+  stiffness: 100.0
+  parent: "servo_bracket_fp04_f2"
+  child: "servo_0"
+  parent_offset {
+    x: 0.03999999910593033
+  }
+  child_offset {
+  }
+  rotation {
+    x: 90.0
+  }
+  angle_limit {
+    min: -60.0
+    max: 60.0
+  }
+  limit_strength: 0.0
+  spring_damping: 3.0
+}
+actuators {
+  name: "joint0"
+  joint: "joint0"
+  strength: 25.0
+  torque {
+  }
+}
+friction: 0.6000000238418579
+gravity {
+  z: -9.8100004196167
+}
+baumgarte_erp: 0.10000000149011612
+collide_include {
+  first: "ground"
+  second: "servo_bracket_fp04_f2"
+}
+collide_include {
+  first: "ground"
+  second: "servo_0"
+}
+dt: 0.019999999552965164
+substeps: 4
+frozen {
+  position {
+    z: 1.0
+  }
+  rotation {
+    x: 1.0
+    y: 1.0
+  }
+}
+)
+```
+
+
+The output of (joint_angle,), _ = self.sys.joint_revolute.angle_vel(qp) looks like
+
+```
+joint_angle >[0.]<
+vel >(DeviceArray([0.], dtype=float32),)<
+```
+
+
+### reset()
+
+The reset method is called at the beginning of a training, so everything should be resettet or
+e.g. a target should get a random new value.
 
