@@ -392,25 +392,23 @@ rotation	 The rotation of ???
 ```
 
 ```
-angular_damping	 The ????
+angular_damping	 This seemed NEEDED if you have a torque actuator and not limit_strength
 ```
 
 ```
 angle_limit	 The limit that the joint can reach. Inside there is "min" and "max".
-					Its in degrees ???
+					Its in degrees.
 ```
 
 ```
-stiffness	 	The ????
+stiffness	 	This seemed NEEDED if you want that the angle_limit should be min/max
 ```
 
 ```
 limit_strength	 	The ????
 ```
 
-```
-stiffness	 	The ????
-```
+
 
 
 
