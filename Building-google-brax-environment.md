@@ -313,3 +313,33 @@ With this only it still falls through ground so we add
 ```
 baumgarte_erp: 0.1
 ```
+
+Now it does not fall through the ground anymore. But we see that the two boxes seem to fall apart.
+
+So we add stiffness to the joint
+
+```
+joints {
+  name: "joint0"
+  parent: "box_1"
+  child: "box_2"
+  parent_offset {
+    x: 0.5
+  }
+  child_offset {
+    x: -0.25
+  }
+  angle_limit {
+      min: -60
+      max: 60
+  }
+  stiffness: 15000.0
+}
+```
+
+Then it looks like
+
+![images/google-brax/testenvgif-3.gif](images/google-brax/testenvgif-3.gif)
+
+
+But the actuator does not turn it anymore.
