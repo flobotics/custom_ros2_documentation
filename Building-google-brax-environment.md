@@ -274,3 +274,42 @@ actuators {
 If we now run all code cells of training.ipynb the trajectory looks like
 
 ![images/google-brax/testenvgif-1.gif](images/google-brax/testenvgif-1.gif)
+
+
+## Now add some physics, gravity
+
+The two boxes seem to float in space, so we add gravity. To the _SYSTEM_CONFIG add
+
+```
+gravity { z: -9.81 }
+```
+
+When we again restart kernel and run all cells it looks 
+
+![images/google-brax/testenvgif-2.gif](images/google-brax/testenvgif-2.gif)
+
+
+The boxes fall apart from the joint it seemed and the two boxes fall through the Ground.
+
+
+## Add more physics, collide_include
+
+To _SYSTEM_CONFIG add
+
+```
+collide_include {
+  first: "box_1"
+  second: "Ground"
+}
+collide_include {
+  first: "box_2"
+  second: "Ground"
+}
+```
+
+With this only it still falls through ground so we add
+
+
+```
+baumgarte_erp: 0.1
+```
