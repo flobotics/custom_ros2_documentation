@@ -185,6 +185,18 @@ env_name = "testenv"  # @param ['testenv','ant', 'humanoid', 'fetch', 'grasp', '
 
 And in the "Training some pre-included Brax environments" section you need to add a trainer/learner. For the first time, copy another one or rename one.
 
+```
+'testenv': functools.partial(
+      ppo.train, num_timesteps = 100, log_frequency = 20,
+      reward_scaling = 5, episode_length = 10, normalize_observations = True,
+      action_repeat = 4, unroll_length = 50, num_minibatches = 32,
+      num_update_epochs = 8, discounting = 0.95, learning_rate = 3e-4,
+      entropy_cost = 1e-3, num_envs = 2048, batch_size = 256,
+      max_devices_per_host = 8, seed = 1),
+```
+
+Then a max_y and min_y for the visualization of the chart.
+
 
 ## Run it, watch it
 
