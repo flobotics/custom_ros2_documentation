@@ -343,3 +343,56 @@ Then it looks like
 
 
 But the actuator does not turn it anymore.
+
+We increase the strength of the actuator to 100.0
+
+```
+actuators {
+  name: "joint0"
+  joint: "joint0"
+  strength: 100.0
+  torque {
+  }
+}
+```
+
+Now it looks like this. Note how it stopped after some actions, why ?
+
+![images/google-brax/testenvgif-4.gif](images/google-brax/testenvgif-4.gif)
+
+
+The only things i know till now we can also add to the main part of _SYSTEM_CONFIG is
+
+```
+friction: 0.6
+angular_damping: -0.05
+```
+
+but that does not change that it stops after one rotation it seemed ?
+
+If we add angular_damping to the joint like this
+
+```
+joints {
+  name: "joint0"
+  parent: "box_1"
+  child: "box_2"
+  parent_offset {
+    x: 0.5
+  }
+  child_offset {
+    x: -0.25
+  }
+  angle_limit {
+      min: -60
+      max: 60
+  }
+  stiffness: 15000.0
+  angular_damping: 35
+}
+```
+
+it looks like this, which seemed to rotate only in one direction and then stops. The above
+gif rotates in both directions, why ?
+
+![images/google-brax/testenvgif-5.gif](images/google-brax/testenvgif-5.gif)
