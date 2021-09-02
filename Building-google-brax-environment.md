@@ -396,3 +396,45 @@ it looks like this, which seemed to rotate only in one direction and then stops.
 gif rotates in both directions, why ?
 
 ![images/google-brax/testenvgif-5.gif](images/google-brax/testenvgif-5.gif)
+
+
+Perhaps it has something todo that the target is placed at 0,0,0 because there is no update in the reset function. So we add it these lines to reset function
+
+```
+    rng, target = self._random_target(rng)
+    pos = jax.ops.index_update(qp.pos, jax.ops.index[self.target_idx], target)
+    qp = dataclasses.replace(qp, pos=pos)
+```
+
+completly it looks now like this
+
+```
+def reset(self, rng: jnp.ndarray) -> env.State:
+    qp = self.sys.default_qp()
+    rng, target = self._random_target(rng)
+    pos = jax.ops.index_update(qp.pos, jax.ops.index[self.target_idx], target)
+    qp = dataclasses.replace(qp, pos=pos)
+    
+    info = self.sys.info(qp)
+    obs = self._get_obs(qp, info)
+    reward, done, steps, zero = jnp.zeros(4)
+    metrics = {
+        'hits': zero
+    }
+    return env.State(rng, qp, info, obs, reward, done, steps, metrics)
+```
+
+We also add some more offset to the child (box_2), perhaps it has something todo with friction ? but i dont thing so, but test it. Inside the joint we add something to parent_offset x
+with 
+
+```
+parent_offset {
+    x: 0.55
+  }
+```
+
+
+
+Now it looks like this. It seemed to dance, but where does the force come from ? why is it not rotating anymore ?
+
+![images/google-brax/testenvgif-6.gif](images/google-brax/testenvgif-6.gif)
