@@ -438,3 +438,32 @@ parent_offset {
 Now it looks like this. It seemed to dance, but where does the force come from ? why is it not rotating anymore ?
 
 ![images/google-brax/testenvgif-6.gif](images/google-brax/testenvgif-6.gif)
+
+
+We add limit_strength: 0.0 and spring_damping: 30.0 to joint, so it looks so
+
+```
+joints {
+  name: "joint0"
+  parent: "box_1"
+  child: "box_2"
+  parent_offset {
+    x: 0.55
+  }
+  child_offset {
+    x: -0.25
+  }
+  angle_limit {
+      min: -60
+      max: 60
+  }
+  rotation { x: 90 }
+  limit_strength: 0.0
+  spring_damping: 30.0
+  stiffness: 1000.0
+}
+```
+
+Now it looks so. It moves, a little bit radical. Also it seemed to rotate only in one direction and it rotates more than -60/60 degrees ?
+
+![images/google-brax/testenvgif-7.gif](images/google-brax/testenvgif-7.gif)
