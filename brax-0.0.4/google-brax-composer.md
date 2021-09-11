@@ -85,7 +85,7 @@ visualize(env.sys, [state.qp])
 
 The last cell visualizes the env which looks like 
 
-![images/google-brax/composer-test/composer-test-1.png](images/google-brax/composer-test/composer-test-1.png)
+![../images/google-brax/composer-test/composer-test-1.png](../images/google-brax/composer-test/composer-test-1.png)
 
 
 ## Create a composer env with composer.create_fn()
@@ -151,7 +151,7 @@ visualize(env.sys, [state.qp])
 
 If we run these cells it looks like
 
-![images/google-brax/composer-test/composer-test-2.png](images/google-brax/composer-test/composer-test-2.png)
+![../images/google-brax/composer-test/composer-test-2.png](../images/google-brax/composer-test/composer-test-2.png)
 
 
 Then we add the training part

@@ -233,11 +233,11 @@ visualize(envf.sys, [state.qp])
 
 The above code in a colab notebook will give the following result
 
-![images/brax-capsule.png](images/brax-capsule.png)
+![../images/brax-capsule.png](../images/brax-capsule.png)
 
 If we move with the mouse the plane, we see the target (red sphere) under the plane.
 
-![images/brax-capsule-from-bottom.png](images/brax-capsule-from-bottom.png)
+![../images/brax-capsule-from-bottom.png](../images/brax-capsule-from-bottom.png)
 
 
 ## What do we have ?

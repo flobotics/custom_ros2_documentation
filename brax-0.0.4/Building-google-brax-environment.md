@@ -202,8 +202,8 @@ Then a max_y and min_y for the visualization of the chart.
 
 Run the training.ipynb first two code cells to see what we created.
 
-![images/google-brax/testenv-1.png](images/google-brax/testenv-1.png)
-![images/google-brax/testenv-2.png](images/google-brax/testenv-2.png)
+![../images/google-brax/testenv-1.png](../images/google-brax/testenv-1.png)
+![../images/google-brax/testenv-2.png](../images/google-brax/testenv-2.png)
 
 
 ## Connect the two boxes with a joint
@@ -230,7 +230,7 @@ joints {
 
 We we restart the jupyter kernel and run the first two code cells again we see this
 
-![images/google-brax/testenv-3.png](images/google-brax/testenv-3.png)
+![../images/google-brax/testenv-3.png](../images/google-brax/testenv-3.png)
 
 
 Now we move the child the halfsize of x of the child (box_2). As we look now from child, the value is minus 0.25 (the halfsize of box_2 x)
@@ -255,7 +255,7 @@ joints {
 
 Now it looks this
 
-![images/google-brax/testenv-4.png](images/google-brax/testenv-4.png)
+![../images/google-brax/testenv-4.png](../images/google-brax/testenv-4.png)
 
 ## To move the joint, add an actuator
 
@@ -273,7 +273,7 @@ actuators {
 
 If we now run all code cells of training.ipynb the trajectory looks like
 
-![images/google-brax/testenvgif-1.gif](images/google-brax/testenvgif-1.gif)
+![../images/google-brax/testenvgif-1.gif](../images/google-brax/testenvgif-1.gif)
 
 
 ## Now add some physics, gravity
@@ -286,7 +286,7 @@ gravity { z: -9.81 }
 
 When we again restart kernel and run all cells it looks 
 
-![images/google-brax/testenvgif-2.gif](images/google-brax/testenvgif-2.gif)
+![../images/google-brax/testenvgif-2.gif](../images/google-brax/testenvgif-2.gif)
 
 
 The boxes fall apart from the joint it seemed and the two boxes fall through the Ground.
@@ -339,7 +339,7 @@ joints {
 
 Then it looks like
 
-![images/google-brax/testenvgif-3.gif](images/google-brax/testenvgif-3.gif)
+![../images/google-brax/testenvgif-3.gif](../images/google-brax/testenvgif-3.gif)
 
 
 But the actuator does not turn it anymore.
@@ -358,7 +358,7 @@ actuators {
 
 Now it looks like this. Note how it stopped after some actions, why ?
 
-![images/google-brax/testenvgif-4.gif](images/google-brax/testenvgif-4.gif)
+![../images/google-brax/testenvgif-4.gif](../images/google-brax/testenvgif-4.gif)
 
 
 The only things i know till now we can also add to the main part of _SYSTEM_CONFIG is
@@ -395,7 +395,7 @@ joints {
 it looks like this, which seemed to rotate only in one direction and then stops. The above
 gif rotates in both directions, why ?
 
-![images/google-brax/testenvgif-5.gif](images/google-brax/testenvgif-5.gif)
+![../images/google-brax/testenvgif-5.gif](../images/google-brax/testenvgif-5.gif)
 
 
 Perhaps it has something todo that the target is placed at 0,0,0 because there is no update in the reset function. So we add it these lines to reset function
@@ -437,7 +437,7 @@ parent_offset {
 
 Now it looks like this. It seemed to dance, but where does the force come from ? why is it not rotating anymore ?
 
-![images/google-brax/testenvgif-6.gif](images/google-brax/testenvgif-6.gif)
+![../images/google-brax/testenvgif-6.gif](../images/google-brax/testenvgif-6.gif)
 
 
 We add limit_strength: 0.0 and spring_damping: 30.0 to joint, so it looks so
@@ -466,4 +466,4 @@ joints {
 
 Now it looks so. It moves, a little bit radical. Also it seemed to rotate only in one direction and it rotates more than -60/60 degrees ?
 
-![images/google-brax/testenvgif-7.gif](images/google-brax/testenvgif-7.gif)
+![../images/google-brax/testenvgif-7.gif](../images/google-brax/testenvgif-7.gif)
